@@ -4,127 +4,113 @@ import { useState } from "react";
 import { useScrollReveal } from "./useScrollReveal";
 
 const categories = [
-  { id: "pilav", label: "Pilavlar" },
-  { id: "eriste", label: "Erişte & Laghman" },
-  { id: "et", label: "Et Yemekleri" },
-  { id: "diger", label: "Diğer Lezzetler" },
+  { id: "corbalar", label: "Çorbalar" },
+  { id: "ana-yemekler", label: "Ana Yemekler" },
+  { id: "tavuk", label: "Tavuk Yemekleri" },
+  { id: "sebze-ara", label: "Sebzeler / Ara Sıcaklar" },
+  { id: "sebze-detay", label: "Sebze Yemekleri" },
+  { id: "makarna-pilav", label: "Makarna & Pilav" },
+  { id: "manti-hamur", label: "Mantı & Hamur İşleri" },
+  { id: "noodle-ramen", label: "Noodle / Ramen" },
+  { id: "salatalar", label: "Salatalar" },
 ];
 
 const menuItems: Record<
   string,
   { name: string; description: string; price: string; popular?: boolean }[]
 > = {
-  pilav: [
-    {
-      name: "Uygur Pilavı",
-      description:
-        "Kuzu eti, havuç, soğan ve özel baharatlarla pişirilen geleneksel pilav",
-      price: "₺180",
-      popular: true,
-    },
-    {
-      name: "Tavuklu Pilav",
-      description: "Taze tavuk göğsü ile hazırlanan hafif ve lezzetli pilav",
-      price: "₺150",
-    },
-    {
-      name: "Sebzeli Pilav",
-      description:
-        "Mevsim sebzeleri ve baharatlarla zenginleştirilmiş vejetaryen pilav",
-      price: "₺130",
-    },
-    {
-      name: "Özel Karışık Pilav",
-      description:
-        "Kuzu eti, kuru üzüm ve badem ile hazırlanan şef özel pilavı",
-      price: "₺220",
-      popular: true,
-    },
+  corbalar: [
+    { name: "Yumurta Çorba", description: "", price: "₺280" },
+    { name: "Soslu Makarna Çorba", description: "", price: "₺280" },
+    { name: "Köfte Çorba", description: "", price: "₺280" },
+    { name: "Makarna Çorba", description: "", price: "₺280" },
+    { name: "Uygur (Ügre)", description: "", price: "₺280" },
+    { name: "Çiçüre", description: "", price: "₺280" },
   ],
-  eriste: [
-    {
-      name: "Laghman",
-      description:
-        "El açması kalın erişte, sebzeli et sosuyla — mutfağımızın yıldızı",
-      price: "₺170",
-      popular: true,
-    },
-    {
-      name: "Suyon Laghman",
-      description: "Çorba kıvamında servis edilen sıcak laghman",
-      price: "₺160",
-    },
-    {
-      name: "Kızarmış Laghman",
-      description:
-        "Wok'ta sebze ve et ile kavrulmuş çıtır erişte",
-      price: "₺175",
-    },
-    {
-      name: "Chöchüre (Mantı)",
-      description:
-        "El yapımı Uygur mantısı, yoğurt ve özel sos ile servis edilir",
-      price: "₺165",
-      popular: true,
-    },
+  "ana-yemekler": [
+    { name: "Kazan Kebabı", description: "", price: "₺780", popular: true },
+    { name: "Patates Dana Et", description: "", price: "₺780" },
+    { name: "Özel Dana Et", description: "", price: "₺780" },
+    { name: "Mantarlı Kavurma", description: "", price: "₺355" },
+    { name: "Bütün Balık", description: "", price: "₺988" },
+    { name: "Buharda Balık", description: "", price: "₺388" },
+    { name: "Acılı Ekşili Balık", description: "", price: "₺988" },
+    { name: "Tavada Dana Et", description: "", price: "₺640" },
+    { name: "Balık Kızartması", description: "", price: "₺988" },
+    { name: "Nefis Acılı Balık", description: "", price: "Fiyat Sorunuz" },
   ],
-  et: [
-    {
-      name: "Kawap (Şiş Kebap)",
-      description:
-        "Özel marine edilmiş kuzu eti şişleri, közlenmiş sebze ile",
-      price: "₺200",
-      popular: true,
-    },
-    {
-      name: "Dapanji (Büyük Tabak Tavuk)",
-      description:
-        "Patates ve biberlerle pişirilen bütün tavuk, geniş porsiyonlar için ideal",
-      price: "₺280",
-    },
-    {
-      name: "Kuzu Tandır",
-      description:
-        "Uzun süre düşük ateşte pişirilen yumuşacık kuzu eti",
-      price: "₺250",
-    },
-    {
-      name: "Et Sote",
-      description:
-        "Mevsim sebzeleri ile birlikte kavrulmuş dana eti parçaları",
-      price: "₺190",
-    },
+  tavuk: [
+    { name: "Kuru Tavuk Kavurması", description: "", price: "₺580 / ₺380" },
+    { name: "Fıstıklı Tavuk Kavurması", description: "", price: "₺580 / ₺380" },
+    { name: "Çıtır Tavuk Kavurması", description: "", price: "₺575", popular: true },
+    { name: "Acılı Biber Tavuk Kavurması", description: "", price: "₺580 / ₺380" },
+    { name: "Özel Tavuk Kavurması", description: "", price: "₺950 / ₺620" },
+    { name: "Tatlı Ekşili Tavuk", description: "", price: "Fiyat Sorunuz" },
   ],
-  diger: [
-    {
-      name: "Samsa (Börek)",
-      description:
-        "Tandırda pişirilen kıymalı veya patatesli çıtır börek",
-      price: "₺80",
-    },
-    {
-      name: "Nan Ekmeği",
-      description:
-        "Geleneksel Uygur tandır ekmeği, her yemeğin yanına",
-      price: "₺40",
-    },
-    {
-      name: "Çay Servisi",
-      description:
-        "Geleneksel Uygur çayı — siyah çay veya süt çayı seçenekleri",
-      price: "₺35",
-    },
-    {
-      name: "Mevsim Salatası",
-      description:
-        "Taze mevsim sebzeleri, limon ve zeytinyağı sosu ile",
-      price: "₺60",
-    },
+  "sebze-ara": [
+    { name: "Lince Patates", description: "", price: "Fiyat Sorunuz" },
+    { name: "Acılı Erişte Patates", description: "", price: "₺355" },
+    { name: "Du Fu Kızartması", description: "", price: "₺568" },
+    { name: "Acılı Du Fu", description: "", price: "₺548" },
+    { name: "Yumurta Domates Kavurma", description: "", price: "₺355" },
+    { name: "Yumurta Ispanak Kavurma", description: "", price: "₺355" },
+    { name: "Kabak Kavurması", description: "", price: "₺355" },
+    { name: "Fasulye Kızartması", description: "", price: "₺420" },
+    { name: "Biber Kızartması", description: "", price: "₺365" },
+    { name: "Brokoli Kavurması", description: "", price: "₺355" },
+    { name: "Patates Kızartması", description: "", price: "₺220" },
+    { name: "Etli Patates", description: "", price: "Fiyat Sorunuz" },
+  ],
+  "sebze-detay": [
+    { name: "Lahana", description: "", price: "Fiyat Sorunuz" },
+    { name: "Patlıcan Musakka", description: "", price: "₺355" },
+    { name: "Uygur Ekmek", description: "", price: "₺50" },
+    { name: "Patates Fasulye", description: "", price: "₺420" },
+    { name: "Patlıcanlı Fasulye", description: "", price: "₺420" },
+    { name: "İşkembe Kavurma", description: "", price: "₺430 / ₺360" },
+    { name: "Taze Soğanlı Et", description: "", price: "₺430 / ₺660" },
+    { name: "Mantarlı Et", description: "", price: "₺430 / ₺660" },
+    { name: "Ağaç Mantarlı Et", description: "", price: "₺430 / ₺660" },
+    { name: "Köy Biberli Et", description: "", price: "Fiyat Sorunuz" },
+    { name: "Nefis Sebzeli Et", description: "", price: "₺430 / ₺660" },
+    { name: "Etli Fasulye", description: "", price: "₺430 / ₺420" },
+  ],
+  "makarna-pilav": [
+    { name: "Özel Makarna Kavurması", description: "", price: "₺360" },
+    { name: "Kıymalı Makarna Kavurması", description: "", price: "₺370" },
+    { name: "Etli Sebzeli Pilav", description: "", price: "₺360" },
+    { name: "Uygur Pilavı", description: "", price: "₺338", popular: true },
+    { name: "Yumurtalı Sebzeli Pilav", description: "", price: "₺360" },
+    { name: "Beyaz Pilav", description: "", price: "₺130" },
+  ],
+  "manti-hamur": [
+    { name: "Uygur Etli Ekmek", description: "", price: "₺420", popular: true },
+    { name: "Etli Pitir Mantı", description: "", price: "₺370 / ₺175" },
+    { name: "Buharda Kıymalı Mantı", description: "", price: "₺370 / ₺175" },
+    { name: "Su Mantısı", description: "", price: "₺375" },
+    { name: "Mantı Kızartması", description: "", price: "₺375" },
+    { name: "Samsa", description: "", price: "₺140" },
+  ],
+  "noodle-ramen": [
+    { name: "Lenzhou Ramen", description: "Dana Etli Erişte Çorba", price: "₺280", popular: true },
+    { name: "Lagmen", description: "", price: "₺360" },
+    { name: "Özel Lagmen", description: "", price: "₺360" },
+    { name: "Kıymalı Lagmen", description: "", price: "₺370" },
+  ],
+  salatalar: [
+    { name: "Brokoli Salata", description: "", price: "₺280" },
+    { name: "Mor Salata", description: "", price: "₺280" },
+    { name: "Havuç Salata", description: "", price: "₺210" },
+    { name: "Özel Soslu Salata", description: "", price: "Fiyat Sorunuz" },
+    { name: "Ispanak Salata", description: "", price: "₺210" },
+    { name: "Çoban Salata", description: "", price: "₺190" },
+    { name: "Dana Et Salata", description: "", price: "₺428" },
+    { name: "İşkembe Salata", description: "", price: "₺350" },
   ],
 };
 
 export default function Menu() {
-  const [active, setActive] = useState("pilav");
+  const [active, setActive] = useState("corbalar");
   useScrollReveal();
 
   return (
@@ -185,9 +171,11 @@ export default function Menu() {
                       </span>
                     )}
                   </div>
-                  <p className="text-espresso/60 text-sm mt-2 leading-relaxed">
-                    {item.description}
-                  </p>
+                  {item.description && (
+                    <p className="text-espresso/60 text-sm mt-2 leading-relaxed">
+                      {item.description}
+                    </p>
+                  )}
                 </div>
                 <span className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-accent whitespace-nowrap">
                   {item.price}
